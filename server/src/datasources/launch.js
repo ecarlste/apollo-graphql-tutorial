@@ -26,6 +26,8 @@ class LaunchAPI extends RESTDataSource {
   }
 
   launchReducer(launch) {
+      console.log(launch);
+      
     return {
       id: launch.flight_number || 0,
       cursor: `${launch.launch_date_unix}`,
