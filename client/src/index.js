@@ -18,8 +18,6 @@ const client = new ApolloClient({
   link
 });
 
-
-
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Pages />
