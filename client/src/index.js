@@ -8,15 +8,29 @@ import { ApolloProvider } from 'react-apollo';
 import gql from "graphql-tag";
 
 import Pages from './pages';
+import {resolvers, typeDefs} from './resolvers';
+
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
-  uri: 'http://localhost:4000/'
+  uri: 'http://localhost:4000/graphql',
+  headers: {
+    authorization: localStorage.getItem('token'),
+  },
 });
 
 const client = new ApolloClient({
   cache,
-  link
+  link,
+  resolvers,
+  typeDefs,
+});
+
+cache.writeData({
+  data: {
+    isLoggedIn: !!localStorage.getItem('token'),
+    cartItems: [],
+  },
 });
 
 ReactDOM.render(
